@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studio
+  namespace: cass-operator
+  labels:
+    app: studio
+spec:
+  selector:
+    matchLabels:
+      app: studio
+  template:
+    metadata:
+      labels:
+        app: studio
+    spec:
+      containers:
+      - name: studio
+        image: datastax/dse-studio:latest
+        env:
+        - name: DS_LICENSE
+          value: accept
+        ports:
+        - containerPort: 9091
+          name: studio-ui
+        - containerPort: 61620
+          name: studio-whatever
